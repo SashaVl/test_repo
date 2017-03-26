@@ -1,0 +1,23 @@
+{{ set(this, 'title', title) }}
+{{ use('/yii/widgets/ActiveForm') }}
+
+    <div id="in">
+        <h1>Додати нову команду</h1>
+        {% set form = active_form_begin({
+        'id' : 'addForm',
+        'options' : {
+        'class' : 'form-horizontal'
+
+        },
+
+        }) %}
+        {{ form.field(model, 'name').textInput() | raw }}
+        {{ form.field(model, 'year_create').textInput() | raw }}
+
+        <div class="form-group">
+            <div class="col-lg-offset-1 col-lg-11">
+                <input type="submit" value="Додати" class="btn btn-primary" />
+            </div>
+        </div>
+        {{ active_form_end() }}
+    </div>

@@ -1,0 +1,37 @@
+{{ register_asset_bundle('app/assets/AppAsset') }}  {# asset root for yii advanced template #}
+{{   void(this.beginPage()) }}
+<!DOCTYPE html>
+<html lang="{{ app.language }}">
+<head>
+    <meta charset="{{ app.charset }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{ html.csrfMetaTags | raw }}
+    <title>{{ html.encode(this.title) }}</title>
+    {{   void(this.head) }}
+</head>
+<body>
+{{   void(this.beginBody()) }}
+    <div class="wrap">
+
+        {{ nav_bar_begin({
+            'brandLabel': 'Головна сторінка',
+            'brandUrl' : url.base(true),
+            'options' : {
+                'class' : 'header navbar navbar-fixed-top',
+            }
+        }) }}
+        {{ nav_bar_end() }}
+        <div class="container">
+            {{ content | raw}}
+        </div>
+    </div>
+<footer class="footer">
+    <div class="container">
+        <p class="pull-left">&copy; Vlasyuk O. {{ 'now'|date('Y') }} </p>
+
+    </div>
+</footer>
+    {{ void(this.endBody()) }}
+</body>
+</html>
+{{   void(this.endPage()) }}

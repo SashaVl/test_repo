@@ -1,0 +1,60 @@
+{{ set(this, 'title', title) }}
+
+{{ use('/yii/widgets/ActiveForm') }}
+<div style="text-align: right;"> <a class="btn btn-success" href="{{ url.base(true) }}/index.php?r=player%2Fcreate&id={{ team.id }}">Додати нового гравця</a></div> <br>
+    <table id="w0" class="table table-striped table-bordered detail-view">
+        <tr>
+            <td colspan="6" style="text-align: center;font-size: 16px;font-weight: bold;">
+                Гравці команди "{{ team.name }}"
+            </td>
+        </tr>
+        <tr style="text-align: center;font-size: 16px;">
+            <td>
+                Ід
+            </td>
+            <td>
+                Ім'я
+            </td>
+            <td>
+                Прізвище
+            </td>
+            <td>
+                Дата народження
+            </td>
+            <td>
+                Позиція на полі
+            </td>
+            <td>
+
+            </td>
+        </tr>
+{% for player in players %}
+    <tr>
+        <td style="text-align: center;">
+            {{ player.id }}
+        </td>
+        <td class="tdName">
+            {{ player.name }}
+        </td>
+        <td class="tdName">
+            {{ player.sname }}
+        </td>
+        <td style="text-align: center;">
+            {{ player.birthday }}
+        </td>
+        <td style="text-align: center;">
+            {{ player.position }}
+        </td>
+        <td style="text-align: center;">
+            <a  href="{{ url.base(true) }}/index.php?r=player%2Fup&id={{ player.id }}"><button class="btn-primary">Редагувати</button></a><a  href="{{ url.base(true) }}/index.php?r=player%2Fdel&id={{ player.id }}"><button class="btn-danger">Видалити</button></a>
+        </td>
+    </tr>
+{% else %}
+    <tr>
+        <td colspan="6" style="text-align: center;">
+            {{ emptyTable }}
+        </td>
+    </tr>
+{% endfor %}
+    </table>
+<h3>{{ text }}</h3>

@@ -1,0 +1,36 @@
+{{ set(this, 'title', title) }}
+{{ use('/yii/widgets/ActiveForm') }}
+
+    <div id="in">
+        <h1>{{ html.encode(this.title) }}</h1>
+        {% set form = active_form_begin({
+        'id' : 'addForm',
+        'options' : {
+        'class' : 'form-horizontal'
+
+        },
+
+        }) %}
+        {{ form.field(model, 'name').textInput() | raw }}
+        {{ form.field(model, 'sname').textInput() | raw }}
+        {{ form.field(model, 'birthday').widget(DatePicker.className(
+        {
+            'name' : 'check_issue_date',
+            'value' :  'now'|date('d-M-Y'),
+            'options' : {'placeholder' : 'Виберіть дату народження...'},
+            'pluginOptions' :
+            {
+                'format' : 'dd-M-yyyy',
+                'todayHighlight' : true
+            }
+        }
+        ))| raw }}
+        {{ form.field(model, 'position').textInput() | raw }}
+
+        <div class="form-group">
+            <div class="col-lg-offset-1 col-lg-11">
+                <input type="submit" value="Додати" class="btn btn-primary" />
+            </div>
+        </div>
+        {{ active_form_end() }}
+    </div>

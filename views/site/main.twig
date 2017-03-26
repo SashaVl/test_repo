@@ -1,0 +1,53 @@
+{{ set(this, 'title', 'Менеджер футбольних команд') }}
+<div style="text-align: right;"> <a class="btn btn-success" href="{{ url.base(true) }}/index.php?r=site%2Fcreate">Додати нову команду</a></div> <br>
+<h3>{{ text }}</h3>
+<table id="w0" class="table table-striped table-bordered detail-view">
+        <tr>
+            <td colspan="4" style="text-align: center;font-size: 16px;font-weight: bold;">
+                {{ nameTable }}
+            </td>
+        </tr>
+        <tr style="text-align: center;font-size: 16px;">
+            <td>
+                Ід
+            </td>
+            <td>
+                Назва команди
+            </td>
+            <td>
+                Рік створення
+            </td>
+            <td>
+
+            </td>
+        </tr>
+{% for team in teams %}
+    <tr>
+        <td style="text-align: center;">
+            {{ team.id }}
+        </td>
+        <td class="tdName">
+            <a href="{{ url.base(true) }}/index.php?r=player%2Findex&id={{ team.id }}">{{ team.name }}</a>
+        </td>
+        <td style="text-align: center;">
+            {{ team.year_create }}
+        </td>
+        <td style="text-align: center;">
+            <a href="{{ url.base(true) }}/index.php?r=site%2Fup&id={{ team.id }}"><button class="btn-primary">Редагувати</button></a>
+
+            {% set numPlayers = team.countOfPlayers({ 'id' : team.id }) %}
+            {%   if numPlayers == 0 %}
+            <a  href="{{ url.base(true) }}/index.php?r=site%2Fdel&id={{ team.id }}"><button class="btn-danger">Видалити</button></a>
+            {%  else %}
+            <button class="btn-danger" onclick="$ans = prompt('Ви впевнені що хочете видалити команду з гравцями? \n Щоб видалити введіть: так'); if($ans == 'так') window.location.href = '{{ url.base(true) }}/index.php?r=site%2Fdel&id={{ team.id }}';">Видалити</button>
+            {% endif %}
+        </td>
+    </tr>
+{% else %}
+    <tr>
+        <td colspan="4">
+            {{ emptyTable }}
+        </td>
+    </tr>
+{% endfor %}
+    </table>
