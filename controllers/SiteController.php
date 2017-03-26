@@ -93,6 +93,7 @@ class SiteController extends Controller
         if($model !== null)
         {
             $name = $model['name'];
+            $model->delFromTeam($id);
             $model->delete();
         }
         return $this->redirect(['index', 'text' => 'Видалено команду '.$name]);
