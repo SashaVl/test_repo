@@ -2,7 +2,6 @@
 namespace app\models;
 
 use yii\db\ActiveRecord;
-use app\models\Players;
 
 class Teams extends ActiveRecord
 {
@@ -38,5 +37,12 @@ class Teams extends ActiveRecord
     {
         return Players::find()->where(['team_id' => $id])->count('*');
     }
-
+    public function delFromTeam($id)
+    {
+        $players = Players::find()->where(['team_id' => $id])->all();
+        foreach($players as $key => $val)
+        {
+            $val->delete();
+        }
+    }
 }
